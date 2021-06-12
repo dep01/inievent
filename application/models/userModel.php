@@ -30,6 +30,7 @@ class UserModel extends CI_Model
     }
     public function add($data){
         $this->db->insert('users', $data);
+        return $this->db->get_where('users',$data)->result();
     }
 
 }

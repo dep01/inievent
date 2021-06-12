@@ -1,5 +1,5 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-
+use \Firebase\JWT\JWT;
 // TODO: api response custom
 if (!function_exists('apiResult')) {
     function apiResult($status, $data, $message = "data not found") {
@@ -212,4 +212,18 @@ function createRandomSessionId() {
         $i++;
     }
     return $pass;
+}
+
+function generateToken($data){
+    $key = $_ENV["JWT_KEY"];
+    $jwt = JWT::encode($data,$key);
+    return $jwt;
+}
+function decodeToken($token){
+        $key = $_ENV["JWT_KEY"];
+        $decode_token = JWT::decode(substr($token,7),$key,array('HS256'));
+        $response['status']=$decode_token?true:false;
+        $response['message']=$decode_token?'Invalid Access Token':'success';
+        $response['data']=$decode_token?$decode_token:null;
+        return $response;
 }
