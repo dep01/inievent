@@ -1,7 +1,7 @@
 <?php
-use chriskacerguis\RestServer\RestController;
 use \Firebase\JWT\JWT;
-class EventType extends RestController{
+require_once("Base_ControllerApi.php");
+class EventType extends Base_ControllerApi{
 // constructor
   public function __construct(){
     parent::__construct();

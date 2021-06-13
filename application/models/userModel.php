@@ -22,7 +22,7 @@ class UserModel extends CI_Model
         return $this->db->query("SELECT * FROM users WHERE deleted = false and phone ='$phone'")->result_object();
     }
     public function getById($id){
-        return $this->db->query("SELECT * FROM users WHERE deleted = false and id ='$id'")->result_object();
+        return $this->db->query("SELECT id,first_name,last_name,gender,phone,email,image FROM users WHERE deleted = false and id ='$id'")->result_object();
     }
     public function update($data,$id){
         $this->db->where('id', $id);
